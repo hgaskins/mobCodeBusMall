@@ -1,6 +1,12 @@
+createImageTag(imageOne);
+// createImageTag(imageTwo);
+// createImageTag(imageThree);
+
 var catDiv = document.getElementById('catsOnCats');
 
-var newImage = document.getElementById('catImage');
+var imageOne = document.getElementById('imageOne');
+// var imageTwo = document.getElementById('imageTwo');
+// var imageThree = document.getElementById('imageThree');
 
 var displayButton = document.getElementById('myButton');
 
@@ -17,8 +23,12 @@ displayButton.addEventListener("click", showResults);
 catArray[0] = new makeImageObj("bag", "img/catInBag.jpg");
 catArray[1] = new makeImageObj("beach", "img/catOnBeach.jpg");
 catArray[2] = new makeImageObj("train", "img/catOnTrain.jpg");
+catArray[3] = new makeImageObj("school", "img/cat-at-school.jpg");
+catArray[4] = new makeImageObj("work", "img/cat-on-computer.jpg");
 
-showRandomImg();
+
+
+// showRandomImg();
 
 function makeImageObj(name, path) {
   this.name = name;
@@ -38,21 +48,27 @@ function randomImageIndex() {
 
 //function to display random image from list
 function showRandomImg() {
-  var clickCount = newImage.getAttribute("src");
-  console.log(clickCount);
 
 
   //replacing image function
   var n = randomImageIndex();
-  newImage.setAttribute("src", catArray[n].path);
+  imageOne.setAttribute("src", catArray[n].path);
   catArray[n].nShow++;
+  // var j = randomImageIndex();
+  // imageTwo.setAttribute("src", catArray[j].path);
+  // catArray[j].nShow++;
+  // var q = randomImageIndex();
+  // imageThree.setAttribute("src", catArray[q].path);
+  // catArray[q].nShow++;
+
 }
 
-function imageClicked() {
+function imageClicked(event) {
+  var targetId = event.target.getAttribute('id');
   if (processClick) {
     totalClicks++;
     showRandomImg();
-    if (totalClicks >= 5) {
+    if (totalClicks >= 15) {
       //code to display hidden button
       displayButton.setAttribute('style','visibility:visible');
       processClick = false;
@@ -63,5 +79,12 @@ function imageClicked() {
 //function to show results
 function showResults() {
   console.log(totalClicks + " this is working yes?");
+}
 
+function createImageTag(imageId) {
+  var imageTag = document.createElement('img');
+  var n = randomImageIndex();
+  imageTag.setAttribute('src', catArray[n].path);
+  imageTag.setAttribute('id', imageId);
+  catDiv.appendChild(imageTag);
 }
