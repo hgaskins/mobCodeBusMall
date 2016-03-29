@@ -1,6 +1,14 @@
+/*
+=========
+variables
+=========
+*/
+
 var catDiv = document.getElementById('catsOnCats');
 
-var newImage = document.getElementById('catImage');
+var imageOne = document.getElementById('catImageOne');
+var imageTwo = document.getElementById('catImageTwo');
+var imageThree = document.getElementById('catImageThree');
 
 var displayButton = document.getElementById('myButton');
 
@@ -18,7 +26,32 @@ catArray[0] = new makeImageObj("bag", "img/catInBag.jpg");
 catArray[1] = new makeImageObj("beach", "img/catOnBeach.jpg");
 catArray[2] = new makeImageObj("train", "img/catOnTrain.jpg");
 
-showRandomImg();
+showRandomImg(imageOne);
+showRandomImg(imageTwo);
+showRandomImg(imageThree);
+
+
+/*
+=========
+Functions
+=========
+*/
+
+function imageClicked() {
+  if (processClick) {
+    totalClicks++;
+
+    showRandomImg(imageOne);
+    showRandomImg(imageTwo);
+    showRandomImg(imageThree);
+
+    if (totalClicks >= 5) {
+      //code to display hidden button
+      displayButton.setAttribute('style','visibility:visible');
+      processClick = false;
+    }
+  }
+}
 
 function makeImageObj(name, path) {
   this.name = name;
@@ -37,27 +70,15 @@ function randomImageIndex() {
 }
 
 //function to display random image from list
-function showRandomImg() {
-  var clickCount = newImage.getAttribute("src");
-  console.log(clickCount);
+function showRandomImg(image) {
+  // var clickCount = newImage.getAttribute("src");
+  // console.log(clickCount);
 
 
   //replacing image function
   var n = randomImageIndex();
-  newImage.setAttribute("src", catArray[n].path);
+  image.setAttribute("src", catArray[n].path);
   catArray[n].nShow++;
-}
-
-function imageClicked() {
-  if (processClick) {
-    totalClicks++;
-    showRandomImg();
-    if (totalClicks >= 5) {
-      //code to display hidden button
-      displayButton.setAttribute('style','visibility:visible');
-      processClick = false;
-    }
-  }
 }
 
 //function to show results
