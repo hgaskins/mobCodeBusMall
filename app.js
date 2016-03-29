@@ -18,6 +18,12 @@ var totalClicks = 0;
 
 var processClick = true;
 
+/*
+===============
+event listeners
+===============
+*/
+
 catDiv.addEventListener("click", imageClicked);
 
 displayButton.addEventListener("click", showResults);
