@@ -12,6 +12,8 @@ var processClick = true;
 
 catDiv.addEventListener("click", imageClicked);
 
+displayButton.addEventListener("click", showResults);
+
 catArray[0] = new makeImageObj("bag", "img/catInBag.jpg");
 catArray[1] = new makeImageObj("beach", "img/catOnBeach.jpg");
 catArray[2] = new makeImageObj("train", "img/catOnTrain.jpg");
@@ -50,11 +52,16 @@ function imageClicked() {
   if (processClick) {
     totalClicks++;
     showRandomImg();
-    if (totalClicks >= 4) {
+    if (totalClicks >= 5) {
       //code to display hidden button
       displayButton.setAttribute('style','visibility:visible');
       processClick = false;
     }
   }
+}
+
+//function to show results
+function showResults() {
+  console.log(totalClicks + " this is working yes?");
 
 }
