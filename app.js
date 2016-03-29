@@ -12,6 +12,7 @@ var imageThree = document.getElementById('catImageThree');
 
 var displayButton = document.getElementById('myButton');
 var voteMoreButton = document.getElementById('voteMore');
+var chart = document.getElementById('chart');
 
 var catArray = [];
 
@@ -92,5 +93,5 @@ function showRandomImg(image) {
 //function to show results
 function showResults() {
   console.log(totalClicks + " this is working yes?");
-
+  chart.textContent = "the total number of clicks is " + totalClicks;
 }
