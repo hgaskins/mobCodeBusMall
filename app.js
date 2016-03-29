@@ -11,6 +11,7 @@ var imageTwo = document.getElementById('catImageTwo');
 var imageThree = document.getElementById('catImageThree');
 
 var displayButton = document.getElementById('myButton');
+var voteMoreButton = document.getElementById('voteMore');
 
 var catArray = [];
 
@@ -54,6 +55,7 @@ function imageClicked() {
     if (totalClicks >= 5) {
       //code to display hidden button
       displayButton.setAttribute('style','visibility:visible');
+      voteMoreButton.setAttribute('style','visibility:visible');
       processClick = false;
     }
   }
