@@ -93,5 +93,5 @@ function showRandomImg(image) {
 //function to show results
 function showResults() {
   console.log(totalClicks + " this is working yes?");
-  chart.textContent = "the total number of clicks is " + totalClicks;
+  chart.textContent = "the total number of clicks is " + totalClicks + " and this shows how often the Abercrombie cat showed up: " + catArray[0].nShow;
 }
