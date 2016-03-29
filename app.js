@@ -4,7 +4,7 @@ variables
 =========
 */
 
-var catDiv = document.getElementById('catsOnCats');
+// var catDiv = document.getElementById('catsOnCats');
 
 var imageOne = document.getElementById('catImageOne');
 var imageTwo = document.getElementById('catImageTwo');
@@ -26,13 +26,27 @@ event listeners
 ===============
 */
 
-catDiv.addEventListener("click", imageClicked);
+imageOne.addEventListener("click", imageClicked);
+imageTwo.addEventListener("click", imageClicked);
+imageThree.addEventListener("click", imageClicked);
 
 displayButton.addEventListener("click", showResults);
+
+/*
+===============
+arrays
+===============
+*/
 
 catArray[0] = new makeImageObj("bag", "img/catInBag.jpg");
 catArray[1] = new makeImageObj("beach", "img/catOnBeach.jpg");
 catArray[2] = new makeImageObj("train", "img/catOnTrain.jpg");
+
+/*
+================
+calling functions
+================
+*/
 
 showRandomImg(imageOne);
 showRandomImg(imageTwo);
