@@ -8,6 +8,8 @@ var catArray = [];
 
 var totalClicks = 0;
 
+var processClick = true;
+
 catDiv.addEventListener("click", imageClicked);
 
 catArray[0] = new makeImageObj("bag", "img/catInBag.jpg");
@@ -45,10 +47,14 @@ function showRandomImg() {
 }
 
 function imageClicked() {
-  totalClicks++;
-  showRandomImg();
-  if (totalClicks >= 4) {
-    //code to display hidden button
-    displayButton.setAttribute('style','visibility:visible');
+  if (processClick) {
+    totalClicks++;
+    showRandomImg();
+    if (totalClicks >= 4) {
+      //code to display hidden button
+      displayButton.setAttribute('style','visibility:visible');
+      processClick = false;
+    }
   }
+
 }
