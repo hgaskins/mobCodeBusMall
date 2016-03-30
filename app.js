@@ -6,10 +6,11 @@ canvas charts
 
 //function for chart's labels
 
-var makeLabels = function() {
+var makeBarLabels = function() {
   for (var i = 0; i < catArray.length; i++) {
     labelArray[i] = catArray[i].name;
   }
+
 }
 
 //function for chart's y axis or number of clicks
@@ -17,24 +18,33 @@ var makeYAxis = function() {
   for (var i = 0; i < catArray.length; i++) {
     yAxisArray[i] = catArray[i].nClicks;
   }
+  for (var i = 0; i < catArray.length; i++) {
+    percentArray[i] = catArray[i].percent;
+  }
 }
+
+
 
 //function to show results
 function showResults() {
   //++++++++starting
-  makeLabels();
+  makeBarLabels();
   barData.labels = labelArray;
+  barData.percent = labelArray;
   makeYAxis();
   barData.datasets[0].data = yAxisArray;
+  barDataPercent.datasets[0].data = percentArray;
+
+
 
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   //placed invocation of bar chart within showResults function
   var income = document.getElementById("income").getContext("2d");
   new Chart(income).Bar(barData);
 
-  //placed invocation of pie chart within showResults function
-  var countries= document.getElementById("countries").getContext("2d");
-  new Chart(countries).Pie(pieData, pieOptions);
+  var countries = document.getElementById("countries").getContext("2d");
+  new Chart(countries).Bar(barDataPercent);
+
 }
 
 var barData = {
@@ -48,37 +58,17 @@ var barData = {
 	]
 }
 
-//pie chart to display percentages
-
-
-
-var pieData = [
-	{
-		value: 20,
-		color:"#878BB6",
-    label: "purple"
-	},
-	{
-		value : 40,
-		color : "#4ACAB4",
-    label: "green"
-	},
-	{
-		value : 10,
-		color : "#FF8153",
-    label: "orange"
-	},
-	{
-		value : 30,
-		color : "#FFEA88",
-    label: "yellow"
-	}
-];
-
-var pieOptions = {
-	segmentShowStroke : false,
-	animateScale : true
+var barDataPercent = {
+  labels : [], //these are our image titles or this.name
+  datasets : [
+    {
+      fillColor : "rgba(73,188,170,0.4)",
+      strokeColor : "rgba(72,174,209,0.4)",
+      data : [] // clicks
+    }
+  ]
 }
+
 
 
 
@@ -150,6 +140,11 @@ var labelArray = [];
 //++++++++++
 //array to store Yaxis or clicks numbers for chart
 var yAxisArray = [];
+
+//++++++++++++++++
+//array to store yaxis or percent click per show rate
+var percentArray = [];
+
 /*
 ================
 calling functions
