@@ -4,19 +4,49 @@ canvas charts
 =============
 */
 
+//function for chart's labels
+
+var makeLabels = function() {
+  for (var i = 0; i < catArray.length; i++) {
+    labelArray[i] = catArray[i].name;
+  }
+}
+
+//function for chart's y axis or number of clicks
+var makeYAxis = function() {
+  for (var i = 0; i < catArray.length; i++) {
+    yAxisArray[i] = catArray[i].nClicks;
+  }
+}
+
+//function to show results
+function showResults() {
+  //++++++++starting
+  makeLabels();
+  barData.labels = labelArray;
+  makeYAxis();
+  barData.datasets[0].data = yAxisArray;
+
+  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  //placed invocation of bar chart within showResults function
+  var income = document.getElementById("income").getContext("2d");
+  new Chart(income).Bar(barData);
+
+  //placed invocation of pie chart within showResults function
+  var countries= document.getElementById("countries").getContext("2d");
+  new Chart(countries).Pie(pieData, pieOptions);
+}
+
 var barData = {
-	labels : ["January","February","March","April","May","June"], //these are our image titles or this.name
+	labels : [], //these are our image titles or this.name
 	datasets : [
 		{
 			fillColor : "rgba(73,188,170,0.4)",
 			strokeColor : "rgba(72,174,209,0.4)",
-			data : [364,504,605,400,345,320] // clicks
+			data : [] // clicks
 		}
 	]
 }
-
-var income = document.getElementById("income").getContext("2d");
-new Chart(income).Bar(barData);
 
 //pie chart to display percentages
 
@@ -50,8 +80,7 @@ var pieOptions = {
 	animateScale : true
 }
 
-var countries= document.getElementById("countries").getContext("2d");
-new Chart(countries).Pie(pieData, pieOptions);
+
 
 /*
 =========
@@ -112,8 +141,15 @@ catArray[0] = new makeImageObj("bag", "img/catInBag.jpg");
 catArray[1] = new makeImageObj("beach", "img/catOnBeach.jpg");
 catArray[2] = new makeImageObj("train", "img/catOnTrain.jpg");
 catArray[3] = new makeImageObj("computer", "img/cat-on-computer.jpg");
-catArray[4] = new makeImageObj("computer", "img/cat-at-school.jpg");
+catArray[4] = new makeImageObj("school", "img/cat-at-school.jpg");
 
+//+++++++++++++
+//array to store labels for chart
+var labelArray = [];
+
+//++++++++++
+//array to store Yaxis or clicks numbers for chart
+var yAxisArray = [];
 /*
 ================
 calling functions
@@ -134,6 +170,7 @@ showRandomImg(imageThree);
 functions
 =========
 */
+
 
 /*
 function to count the number of clicks on imageOne specifically
@@ -239,21 +276,6 @@ function showRandomImg(image) {
   catArray[n].nShow++;
 }
 
-
-
-//function to show results
-function showResults() {
-  console.log(totalClicks + " this is working yes?");
-  chart.textContent = "the total number of clicks is " + totalClicks + " and this shows how often the Abercrombie cat showed up: " + catArray[0].nShow;
-  /* ++++++++++
-  add in paraNum.textContent per paragraph element position within HTML DOM
-  */
-  paraOne.textContent = "the number of times cat in bag was clicked on " + catArray[0].nClicks;
-  paraTwo.textContent = "the number of times catOnBeach has been clicked is " + catArray[1].nClicks;
-  paraThree.textContent = "the number of times cat on train has been clicked is " + catArray[2].nClicks;
-  paraFour.textContent = "the number of times cat on computer has been clicked is " + catArray[3].nClicks;
-  paraFive.textContent = "the number of times cat at school has been clicked is " + catArray[4].nClicks;
-}
 
 //function to implement vote more button disappearing after clicking and allow for an additional 8 clicks
 function eightMore() {
