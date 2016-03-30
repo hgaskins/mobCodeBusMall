@@ -4,6 +4,18 @@ canvas charts
 =============
 */
 
+//+++++++++++++
+//array to store labels for chart
+var labelArray = [];
+
+//++++++++++
+//array to store Yaxis or clicks numbers for chart
+var yAxisArray = [];
+
+//++++++++++++++++
+//array to store yaxis or percent click per show rate
+var percentArray = [];
+
 //function for chart's labels
 
 var makeBarLabels = function() {
@@ -18,30 +30,40 @@ var makeYAxis = function() {
   for (var i = 0; i < catArray.length; i++) {
     yAxisArray[i] = catArray[i].nClicks;
   }
-  for (var i = 0; i < catArray.length; i++) {
-    percentArray[i] = catArray[i].percent;
-  }
 }
 
+//++++++++++++++++++++
+//adding separate
+var makePercentChart = function() {
+  for (var i = 0; i < catArray.length; i++) {
+
+    var x = Math.floor((catArray[i].nClicks/catArray[i].nShow)*100);
+
+    percentArray.push(x);
+  }
+}
 
 
 //function to show results
 function showResults() {
   //++++++++starting
-  makeBarLabels();
-  barData.labels = labelArray;
-  barData.percent = labelArray;
-  makeYAxis();
-  barData.datasets[0].data = yAxisArray;
+
+  makePercentChart();
   barDataPercent.datasets[0].data = percentArray;
 
+  makeBarLabels();
+  barData.labels = labelArray;
+  barDataPercent.labels = labelArray;
+  makeYAxis();
+  barData.datasets[0].data = yAxisArray;
 
 
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   //placed invocation of bar chart within showResults function
   var income = document.getElementById("income").getContext("2d");
   new Chart(income).Bar(barData);
-
+  console.log(percentArray);
+  //chart variable for barDataPercent
   var countries = document.getElementById("countries").getContext("2d");
   new Chart(countries).Bar(barDataPercent);
 
@@ -133,17 +155,6 @@ catArray[2] = new makeImageObj("train", "img/catOnTrain.jpg");
 catArray[3] = new makeImageObj("computer", "img/cat-on-computer.jpg");
 catArray[4] = new makeImageObj("school", "img/cat-at-school.jpg");
 
-//+++++++++++++
-//array to store labels for chart
-var labelArray = [];
-
-//++++++++++
-//array to store Yaxis or clicks numbers for chart
-var yAxisArray = [];
-
-//++++++++++++++++
-//array to store yaxis or percent click per show rate
-var percentArray = [];
 
 /*
 ================
@@ -245,10 +256,8 @@ function makeImageObj(name, path) {
   this.path = path;
   this.nShow = 0;
   this.nClicks = 0;
-  this.calcPercent = function() { // +++++++++++++++++++++
-    this.percent = Math.floor((this.nClicks/this.nShow)*100); //<------------- added in to calculate percetage clicks/shown
-  };
 }
+
 
 /*
 random number generation to go through amount of images within
