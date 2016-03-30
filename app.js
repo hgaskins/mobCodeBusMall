@@ -27,6 +27,8 @@ var processClick = true;
 //change to 16!
 var clicks = 16;
 
+var x = true;
+
 /*
 variables capturing the paragraph slots
 for textContent addition on show results
@@ -126,12 +128,23 @@ function imageClicked() {
     showRandomImg(imageTwo);
     showRandomImg(imageThree);
 
-
-    if (totalClicks >= clicks) {
+    //+++++++++++++
+    //added in logic here
+    if (totalClicks >= clicks && x && totalClicks < 24) {
+      console.log(totalClicks);
       //code to display hidden button
       displayButton.setAttribute('style','visibility:visible');
       voteMoreButton.setAttribute('style','visibility:visible');
       processClick = false;
+      //+++++++++++++++++++++++++++
+      //added in else statement here
+    } else if (totalClicks === 24) {
+      x = false;
+      voteMoreButton.setAttribute('style', 'visibility:hidden');
+      // processClick = false;
+      console.log(totalClicks);
+      processClick = false;
+      // voteMoreButton <-- remove event listener here
     }
   }
 }
