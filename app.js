@@ -145,6 +145,7 @@ function showResults() {
   chart.textContent = "the total number of clicks is " + totalClicks + " and this shows how often the Abercrombie cat showed up: " + catArray[0].nShow;
   paraOne.textContent = "the number of times cat in bag was clicked on " + catArray[0].nClicks;
   paraTwo.textContent = "the number of times catOnBeach has been clicked is " + catArray[1].nClicks;
+  paraThree.textContent = "the number of times cat on train has been clicked is " + catArray[2].nClicks;
 }
 
 var imageOneCounter = 0;
