@@ -1,4 +1,59 @@
 /*
+=============
+canvas charts
+=============
+*/
+
+var barData = {
+	labels : ["January","February","March","April","May","June"], //these are our image titles or this.name
+	datasets : [
+		{
+			fillColor : "rgba(73,188,170,0.4)",
+			strokeColor : "rgba(72,174,209,0.4)",
+			data : [364,504,605,400,345,320] // clicks
+		}
+	]
+}
+
+var income = document.getElementById("income").getContext("2d");
+new Chart(income).Bar(barData);
+
+//pie chart to display percentages
+
+
+
+var pieData = [
+	{
+		value: 20,
+		color:"#878BB6",
+    label: "purple"
+	},
+	{
+		value : 40,
+		color : "#4ACAB4",
+    label: "green"
+	},
+	{
+		value : 10,
+		color : "#FF8153",
+    label: "orange"
+	},
+	{
+		value : 30,
+		color : "#FFEA88",
+    label: "yellow"
+	}
+];
+
+var pieOptions = {
+	segmentShowStroke : false,
+	animateScale : true
+}
+
+var countries= document.getElementById("countries").getContext("2d");
+new Chart(countries).Pie(pieData, pieOptions);
+
+/*
 =========
 variables
 =========

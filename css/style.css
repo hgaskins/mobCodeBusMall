@@ -1,3 +1,9 @@
 #myButton, #voteMore {
   visibility: hidden;
 }
+
+#chart {
+  /*background-color: red;*/
+  width: 500px;
+  margin: 0 auto;
+}
