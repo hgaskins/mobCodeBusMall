@@ -21,6 +21,15 @@ var totalClicks = 0;
 var processClick = true;
 
 /*
+variables capturing the paragraph slots
+for textContent addition on show results
+*/
+
+var paraOne = document.getElementById('paraOne');
+var paraTwo = document.getElementById('paraTwo');
+var paraThree = document.getElementById('paraThree');
+
+/*
 ===============
 arrays
 ===============
@@ -43,11 +52,11 @@ showRandomImg(imageThree);
 
 /*
 =========
-Functions
+functions
 =========
 */
 
-//function to count the number of clicks on specific image
+//function to count the number of clicks on imageOne specifically
 imageOne.onclick = function() {
   var srcValue = imageOne.getAttribute('src');
 
@@ -57,10 +66,30 @@ imageOne.onclick = function() {
       console.log(catArray[i].path + " #$% " +catArray[i].nClicks);
     }
   }
+}
 
-  console.log(srcValue);
-  // imageOneCounter++;
-  // console.log(imageOneCounter);
+//function to count the number of clicks on imageTwo specifically
+imageTwo.onclick = function() {
+  var srcValue = imageTwo.getAttribute('src');
+
+  for (var i = 0; i < catArray.length; i++) {
+    if (srcValue == catArray[i].path) {
+      catArray[i].nClicks++;
+      console.log(catArray[i].path + " #$% " +catArray[i].nClicks);
+    }
+  }
+}
+
+//function to count the number of clicks on imageThree specifically
+imageThree.onclick = function() {
+  var srcValue = imageThree.getAttribute('src');
+
+  for (var i = 0; i < catArray.length; i++) {
+    if (srcValue == catArray[i].path) {
+      catArray[i].nClicks++;
+      console.log(catArray[i].path + " #$% " +catArray[i].nClicks);
+    }
+  }
 }
 
 function imageClicked() {
@@ -108,10 +137,14 @@ function showRandomImg(image) {
   catArray[n].nShow++;
 }
 
+
+//FIX
 //function to show results
 function showResults() {
   console.log(totalClicks + " this is working yes?");
   chart.textContent = "the total number of clicks is " + totalClicks + " and this shows how often the Abercrombie cat showed up: " + catArray[0].nShow;
+  paraOne.textContent = "the number of times cat in bag was clicked on " + catArray[0].nClicks;
+  paraTwo.textContent = "the number of times catOnBeach has been clicked is " + catArray[1].nClicks;
 }
 
 var imageOneCounter = 0;
