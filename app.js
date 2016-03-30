@@ -65,7 +65,7 @@ calling functions
 ================
 */
 
-/* ++++++++
+/*
 calling the showRandomImg function with specific images here. Will need
 to ammend additional images
 */
@@ -80,7 +80,7 @@ functions
 =========
 */
 
-/* +++++++++
+/*
 function to count the number of clicks on imageOne specifically
 */
 imageOne.onclick = function() {
@@ -89,7 +89,6 @@ imageOne.onclick = function() {
   for (var i = 0; i < catArray.length; i++) {
     if (srcValue == catArray[i].path) {
       catArray[i].nClicks++;
-      console.log(catArray[i].path + " #$% " +catArray[i].nClicks);
     }
   }
 }
@@ -101,7 +100,6 @@ imageTwo.onclick = function() {
   for (var i = 0; i < catArray.length; i++) {
     if (srcValue == catArray[i].path) {
       catArray[i].nClicks++;
-      console.log(catArray[i].path + " #$% " +catArray[i].nClicks);
     }
   }
 }
@@ -113,7 +111,6 @@ imageThree.onclick = function() {
   for (var i = 0; i < catArray.length; i++) {
     if (srcValue == catArray[i].path) {
       catArray[i].nClicks++;
-      console.log(catArray[i].path + " #$% " +catArray[i].nClicks);
     }
   }
 }
@@ -145,6 +142,12 @@ function imageClicked() {
       console.log(totalClicks);
       processClick = false;
       // voteMoreButton <-- remove event listener here
+      voteMoreButton.removeEventListener('click', eightMore);
+      //+++++++++++++++
+      //called to make percent in all image objects
+      for (var i = 0; i < catArray.length; i++) {
+        catArray[i].calcPercent();
+      }
     }
   }
 }
@@ -155,6 +158,9 @@ function makeImageObj(name, path) {
   this.path = path;
   this.nShow = 0;
   this.nClicks = 0;
+  this.calcPercent = function() { // +++++++++++++++++++++
+    this.percent = Math.floor((this.nClicks/this.nShow)*100); //<------------- added in to calculate percetage clicks/shown
+  };
 }
 
 /*
