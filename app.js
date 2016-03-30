@@ -6,12 +6,13 @@ variables
 
 // var catDiv = document.getElementById('catsOnCats');
 
-/* ++++++
+/*
 specific images set to variables and collect the id from DOM
 */
 var imageOne = document.getElementById('catImageOne');
 var imageTwo = document.getElementById('catImageTwo');
 var imageThree = document.getElementById('catImageThree');
+
 
 var displayButton = document.getElementById('myButton');
 var voteMoreButton = document.getElementById('voteMore');
@@ -35,6 +36,7 @@ image and add paragraph elements within html
 var paraOne = document.getElementById('paraOne');
 var paraTwo = document.getElementById('paraTwo');
 var paraThree = document.getElementById('paraThree');
+var paraFour = document.getElementById('paraFour');
 
 /*
 ===============
@@ -48,6 +50,7 @@ make a new object here per image added
 catArray[0] = new makeImageObj("bag", "img/catInBag.jpg");
 catArray[1] = new makeImageObj("beach", "img/catOnBeach.jpg");
 catArray[2] = new makeImageObj("train", "img/catOnTrain.jpg");
+catArray[3] = new makeImageObj("computer", "img/cat-on-computer.jpg");
 
 /*
 ================
@@ -168,6 +171,7 @@ function showResults() {
   paraOne.textContent = "the number of times cat in bag was clicked on " + catArray[0].nClicks;
   paraTwo.textContent = "the number of times catOnBeach has been clicked is " + catArray[1].nClicks;
   paraThree.textContent = "the number of times cat on train has been clicked is " + catArray[2].nClicks;
+  paraFour.textContent = "the number of times cat on train has been clicked is " + catArray[3].nClicks;
 }
 
 var imageOneCounter = 0;
