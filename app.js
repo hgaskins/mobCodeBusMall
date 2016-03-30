@@ -20,6 +20,15 @@ var totalClicks = 0;
 
 var processClick = true;
 
+
+//function to count the number of clicks on specific image
+imageOne.onclick = function() {
+  var srcValue = imageOne.getAttribute('src');
+  console.log(srcValue);
+  // imageOneCounter++;
+  // console.log(imageOneCounter);
+}
+
 /*
 ===============
 event listeners
@@ -109,3 +118,5 @@ function showResults() {
   console.log(totalClicks + " this is working yes?");
   chart.textContent = "the total number of clicks is " + totalClicks + " and this shows how often the Abercrombie cat showed up: " + catArray[0].nShow;
 }
+
+var imageOneCounter = 0;
