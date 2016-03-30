@@ -24,6 +24,9 @@ var totalClicks = 0;
 
 var processClick = true;
 
+//change to 16!
+var clicks = 16;
+
 /*
 variables capturing the paragraph slots
 for textContent addition on show results
@@ -37,6 +40,7 @@ var paraOne = document.getElementById('paraOne');
 var paraTwo = document.getElementById('paraTwo');
 var paraThree = document.getElementById('paraThree');
 var paraFour = document.getElementById('paraFour');
+var paraFive = document.getElementById('paraFive');
 
 /*
 ===============
@@ -51,6 +55,7 @@ catArray[0] = new makeImageObj("bag", "img/catInBag.jpg");
 catArray[1] = new makeImageObj("beach", "img/catOnBeach.jpg");
 catArray[2] = new makeImageObj("train", "img/catOnTrain.jpg");
 catArray[3] = new makeImageObj("computer", "img/cat-on-computer.jpg");
+catArray[4] = new makeImageObj("computer", "img/cat-at-school.jpg");
 
 /*
 ================
@@ -121,7 +126,8 @@ function imageClicked() {
     showRandomImg(imageTwo);
     showRandomImg(imageThree);
 
-    if (totalClicks >= 16) {
+
+    if (totalClicks >= clicks) {
       //code to display hidden button
       displayButton.setAttribute('style','visibility:visible');
       voteMoreButton.setAttribute('style','visibility:visible');
@@ -171,10 +177,17 @@ function showResults() {
   paraOne.textContent = "the number of times cat in bag was clicked on " + catArray[0].nClicks;
   paraTwo.textContent = "the number of times catOnBeach has been clicked is " + catArray[1].nClicks;
   paraThree.textContent = "the number of times cat on train has been clicked is " + catArray[2].nClicks;
-  paraFour.textContent = "the number of times cat on train has been clicked is " + catArray[3].nClicks;
+  paraFour.textContent = "the number of times cat on computer has been clicked is " + catArray[3].nClicks;
+  paraFive.textContent = "the number of times cat at school has been clicked is " + catArray[4].nClicks;
 }
 
-var imageOneCounter = 0;
+//function to implement vote more button disappearing after clicking and allow for an additional 8 clicks
+function eightMore() {
+  clicks = 24;
+  processClick = true;
+  voteMoreButton.setAttribute('style','visibility:hidden');
+
+}
 
 /*
 ===============
@@ -182,7 +195,7 @@ event listeners
 ===============
 */
 
-/*++++++
+/*
 addin eventListener per imageNUMBER variables set at the top of the js file
 */
 imageOne.addEventListener("click", imageClicked);
@@ -190,3 +203,6 @@ imageTwo.addEventListener("click", imageClicked);
 imageThree.addEventListener("click", imageClicked);
 
 displayButton.addEventListener("click", showResults);
+
+//adding eventListener for vote more button
+voteMoreButton.addEventListener("click", eightMore);
