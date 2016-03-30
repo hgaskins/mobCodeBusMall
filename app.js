@@ -20,27 +20,6 @@ var totalClicks = 0;
 
 var processClick = true;
 
-
-//function to count the number of clicks on specific image
-imageOne.onclick = function() {
-  var srcValue = imageOne.getAttribute('src');
-  console.log(srcValue);
-  // imageOneCounter++;
-  // console.log(imageOneCounter);
-}
-
-/*
-===============
-event listeners
-===============
-*/
-
-imageOne.addEventListener("click", imageClicked);
-imageTwo.addEventListener("click", imageClicked);
-imageThree.addEventListener("click", imageClicked);
-
-displayButton.addEventListener("click", showResults);
-
 /*
 ===============
 arrays
@@ -67,6 +46,22 @@ showRandomImg(imageThree);
 Functions
 =========
 */
+
+//function to count the number of clicks on specific image
+imageOne.onclick = function() {
+  var srcValue = imageOne.getAttribute('src');
+
+  for (var i = 0; i < catArray.length; i++) {
+    if (srcValue == catArray[i].path) {
+      catArray[i].nClicks++;
+      console.log(catArray[i].path + " #$% " +catArray[i].nClicks);
+    }
+  }
+
+  console.log(srcValue);
+  // imageOneCounter++;
+  // console.log(imageOneCounter);
+}
 
 function imageClicked() {
   if (processClick) {
@@ -120,3 +115,15 @@ function showResults() {
 }
 
 var imageOneCounter = 0;
+
+/*
+===============
+event listeners
+===============
+*/
+
+imageOne.addEventListener("click", imageClicked);
+imageTwo.addEventListener("click", imageClicked);
+imageThree.addEventListener("click", imageClicked);
+
+displayButton.addEventListener("click", showResults);
