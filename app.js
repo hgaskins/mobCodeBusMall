@@ -63,12 +63,17 @@ function showResults() {
   displayButton.setAttribute('style','visibility:hidden');
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   //placed invocation of bar chart within showResults function
-  var income = document.getElementById("income").getContext("2d");
-  new Chart(income).Bar(barData);
-  console.log(percentArray);
+  var clicksChart = document.getElementById("clicksChart").getContext("2d");
+  //+++++++++++++++++++++++++
+  //asssigning new chart to global variable so we can call destroy method on it
+  clicksChartGlobal = new Chart(clicksChart).Bar(barData);
+  clicksChart = clicksChartGlobal;
+
+
   //chart variable for barDataPercent
-  var countries = document.getElementById("countries").getContext("2d");
-  new Chart(countries).Bar(barDataPercent);
+  var percentChart = document.getElementById("percentChart").getContext("2d");
+  percentChartGlobal = new Chart(percentChart).Bar(barDataPercent);
+  percentChart = percentChartGlobal;
 
 }
 
@@ -129,6 +134,10 @@ var processClick = true;
 var clicks = 16;
 
 var x = true;
+
+//variables to set clicksChart and percentChart to be global in scope
+var clicksChartGlobal;
+var percentChartGlobal;
 
 /*
 variables capturing the paragraph slots
@@ -241,17 +250,22 @@ function imageClicked() {
     } else if (totalClicks === 24) {
       x = false;
       voteMoreButton.setAttribute('style', 'visibility:hidden');
-      // processClick = false;
       console.log(totalClicks);
       processClick = false;
       // voteMoreButton <-- remove event listener here
       voteMoreButton.removeEventListener('click', eightMore);
-
       resetButton.setAttribute('style','visibility:visible');
       showResults();
     }
   }
 }
+
+/*
+===========
+constructor
+===========
+*/
+
 
 //constructor function to make new image objects
 function makeImageObj(name, path) {
@@ -274,7 +288,6 @@ function randomImageIndex() {
 //function to display random image from list
 function showRandomImg(image) {
   // var clickCount = newImage.getAttribute("src");
-  // console.log(clickCount);
 
 
   //replacing image function
@@ -291,6 +304,45 @@ function eightMore() {
   voteMoreButton.setAttribute('style','visibility:hidden');
   displayButton.setAttribute('style','visibility:hidden');
   displayButton.removeEventListener('click', showResults);
+}
+
+function newVoteRound() {
+
+  //destroys charts
+  clicksChartGlobal.destroy();
+  percentChartGlobal.destroy();
+
+  //resets all global variables
+  totalClicks = 0;
+  console.log(totalClicks);
+  processClick = true;
+  clicks = 16;
+  x = true;
+  console.log(clicks);
+  clicksChartGlobal = 0;
+  percentChartGlobal = 0;
+
+  //resets all image object's counters
+  for (var i = 0; i < catArray.length; i++) {
+    catArray[i].nClicks = 0;
+    catArray[i].nShow = 0;
+  }
+
+  //hides reset button
+  resetButton.setAttribute('style','visibility:hidden');
+
+  //repopulate image spaces
+  showRandomImg(imageOne);
+  showRandomImg(imageTwo);
+  showRandomImg(imageThree);
+
+  //rest chart data objects
+  barData.labels = [];
+  barDataPercent.labels = [];
+
+  //add back in eventListeners
+  displayButton.addEventListener('click', showResults);
+  voteMoreButton.addEventListener('click', eightMore);
 }
 
 /*
@@ -310,3 +362,5 @@ displayButton.addEventListener("click", showResults);
 
 //adding eventListener for vote more button
 voteMoreButton.addEventListener("click", eightMore);
+
+resetButton.addEventListener("click", newVoteRound);
