@@ -1,3 +1,5 @@
+// +++++++++++++++++++++++++++++++
+
 /*
 =============
 canvas charts
@@ -45,6 +47,7 @@ var makePercentChart = function() {
 
 
 //function to show results
+//moved showResults function from function section
 function showResults() {
   //++++++++starting
 
@@ -57,7 +60,7 @@ function showResults() {
   makeYAxis();
   barData.datasets[0].data = yAxisArray;
 
-
+  displayButton.setAttribute('style','visibility:hidden');
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   //placed invocation of bar chart within showResults function
   var income = document.getElementById("income").getContext("2d");
@@ -112,6 +115,8 @@ var imageThree = document.getElementById('catImageThree');
 
 var displayButton = document.getElementById('myButton');
 var voteMoreButton = document.getElementById('voteMore');
+var resetButton = document.getElementById('resetButton');
+
 var chart = document.getElementById('chart');
 
 var catArray = [];
@@ -241,11 +246,9 @@ function imageClicked() {
       processClick = false;
       // voteMoreButton <-- remove event listener here
       voteMoreButton.removeEventListener('click', eightMore);
-      //+++++++++++++++
-      //called to make percent in all image objects
-      for (var i = 0; i < catArray.length; i++) {
-        catArray[i].calcPercent();
-      }
+
+      resetButton.setAttribute('style','visibility:visible');
+      showResults();
     }
   }
 }
@@ -286,7 +289,8 @@ function eightMore() {
   clicks = 24;
   processClick = true;
   voteMoreButton.setAttribute('style','visibility:hidden');
-
+  displayButton.setAttribute('style','visibility:hidden');
+  displayButton.removeEventListener('click', showResults);
 }
 
 /*
